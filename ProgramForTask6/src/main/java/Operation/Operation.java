@@ -34,6 +34,10 @@ public abstract class Operation {
         this.result = result;
     }
 
+    public double getResult() {
+        return result;
+    }
+
     /**
      * метод устанавливает форматированное значение в поле stringResult
      */
@@ -57,6 +61,6 @@ public abstract class Operation {
 
     @Override
     public String toString() {
-        return "Результат расчета: " + stringResult +"\n";
+        return "Результат расчета: " + stringResult;
     }
 }

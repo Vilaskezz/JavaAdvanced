@@ -4,7 +4,6 @@ import Operation.SumOperation;
 import Operation.SubOperation;
 import Operation.MultiplyOperation;
 import Operation.DivOperation;
-import java.util.Scanner;
 
 /**
  * Created on 22.08.2024
@@ -14,30 +13,18 @@ public class Calculation {
     private double a; // переменная получает с консоли первое значение для бинарной операции
     private double b; // переменная получает с консоли второе значение для бинарной операции
     private String calcOperator;  // переменная получает с консоли символ выбранной пользователем бинарной операции
-    private boolean calculateResult = true;
+    private boolean calculateResult = false;
     private Operation operator;
 
-    public Calculation(){}
-
-    /**
-     * метод инициализирует значения и вид бинароной операции
-     */
-    public void initializeValues(){
-        Scanner in = new Scanner(System.in);
-        System.out.println("Введите первое число (целое или десятичную дробь): ");
-        a = in.nextDouble();
-        System.out.println("Введите второе число (целое или десятичную дробь): ");
-        b = in.nextDouble();
-        System.out.println("Введите одно из действий миникалькулятора ‘+’, ‘-’, ‘*’ или ‘/’: ");
-        calcOperator = in.next();
-        in.close();
+    public Calculation() {
+        calcOperator = "#";
     }
 
     /**
      * в методе производится выбор бинарной операции и расчет результата ее работы
      */
-    public void calculateOperation(){
-
+    public void calculateOperation() {
+        boolean correctOperator = true;
         switch (calcOperator) {
             case "+": // действие при вводе в коммандной строке символа '+'
                 operator = new SumOperation(a, b);
@@ -52,23 +39,45 @@ public class Calculation {
                 operator = new DivOperation(a, b);
                 break;
             default:
-                calculateResult = false;
+                correctOperator = false;
         }
 
-        if(calculateResult) {
+        if (correctOperator) {
             operator.performOperation();
+            calculateResult = true;
         }
     }
 
-    /**
-     * метод производит вывод результата работы калькулятора в консоль
-     */
-    public void PrintResult() {
-        if(calculateResult){
-            System.out.println(operator.toString());
+    public void setA(double a) {
+        this.a = a;
+    }
+
+    public void setB(double b) {
+        this.b = b;
+    }
+
+    public void setCalcOperator(String calcOperator) {
+        this.calcOperator = calcOperator;
+    }
+
+    public boolean isCalculateResult() {
+        return calculateResult;
+    }
+
+    public double getResult() {
+        double return_result = 0;
+        if (isCalculateResult()) {
+            return_result = operator.getResult();
         }
-        else {
-            System.out.println("Вы что-то ввели некорректно!");
+        return return_result;
+    }
+
+    @Override
+    public String toString() {
+        String return_result = "";
+        if (isCalculateResult()) {
+            return_result = operator.toString();
         }
+        return return_result;
     }
 }
