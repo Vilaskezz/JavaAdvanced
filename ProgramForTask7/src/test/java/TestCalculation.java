@@ -244,6 +244,14 @@ public class TestCalculation {
         Assert.assertEquals("А должно быть 0,77781", 0.77781, calculator.getResult(), 0);
         Assert.assertEquals("Некорректно сфомрмировалась строка", "Результат расчета: 0,7778", calculator.toString());
 
+        // Проверка операции деления на 0
+        a = 3.000;
+        b = 0;
+        calculator.setA(a);
+        calculator.setB(b);
+        calculator.calculateOperation();
+        Assert.assertEquals("А должно быть Infinity", "Infinity", Double.toString(calculator.getResult()));
+        Assert.assertEquals("Некорректно сфомрмировалась строка", "Результат расчета: 'error'", calculator.toString());
     }
 
     @Test

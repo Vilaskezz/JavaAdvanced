@@ -19,6 +19,7 @@ public class DivOperation extends Operation {
     public void performOperation() throws ArithmeticException {
         try {
             if (getB_value() == 0) {
+                setResult(1.00/0);
                 throw new ArithmeticException();
             } else{
             setResult(getA_value() / getB_value());
